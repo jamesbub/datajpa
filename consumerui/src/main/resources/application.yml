@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: consumerui
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8071/eureka/}
+      #defaultZone: http://servicediscovery.default.svc.cluster.local/eureka/
+  instance:
+    preferIpAddress: true
+server:
+  port: 8081

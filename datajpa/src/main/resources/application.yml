@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: datajpa
+  datasource:
+    #url: jdbc:postgresql://localhost:5432/data_jpa
+    url: jdbc:postgresql://${DATABASE}:5432/data_jpa
+    username: postgres
+    password: jamesbub
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8071/eureka/}
+  instance:
+    preferIpAddress: true
+server:
+  port: 8085

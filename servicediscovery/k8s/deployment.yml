@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicediscovery-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicediscovery
+  template:
+    metadata:
+      labels:
+        app: servicediscovery
+    spec:
+      containers:
+        - name: servicediscovery
+          image: jamesbub/servicediscovery:v1
+          command: ["/bin/sh", "-c"]
+          args: ["java -jar servicediscovery.jar --server.port=8080"]
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicediscovery
+spec:
+  selector:
+    app: servicediscovery
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
